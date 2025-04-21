@@ -2,8 +2,6 @@
 
 A simple yet robust application for handling 6-digit OTP (One-Time Password) verification flows. This application includes both frontend and backend components that work together to provide a seamless verification experience.
 
-![OTP Verification Interface](https://via.placeholder.com/600x300)
-
 ## Features
 
 - Secure 6-digit OTP verification system
@@ -20,6 +18,7 @@ A simple yet robust application for handling 6-digit OTP (One-Time Password) ver
 - React.js
 - Tailwind CSS
 - Axios for API requests
+- React-router-dom
 
 ### Backend
 
@@ -27,34 +26,18 @@ A simple yet robust application for handling 6-digit OTP (One-Time Password) ver
 - Node.js
 - RESTful API architecture
 
-## Project Structure
-
-```
-project/
-├── frontend/
-│   ├── src/
-│   │   ├── App.jsx
-│   │   └── ...
-│   └── ...
-└── backend/
-    ├── config/
-    │   └── config.js
-    ├── controllers/
-    │   └── otpController.js
-    ├── middleware/
-    │   ├── errorHandler.js
-    │   └── validator.js
-    ├── routes/
-    │   └── otpRoutes.js
-    ├── services/
-    │   └── otpService.js
-    ├── utils/
-    │   └── responseFormatter.js
-    ├── server.js
-    └── package.json
-```
-
 ## Setup Instructions
+
+Clone the repository to your local machine:
+bash
+
+# Clone the repository
+
+git clone https://github.com/dksah1/otp-app.git
+
+# Navigate to the project directory
+
+cd otp-app
 
 ### Prerequisites
 
@@ -80,7 +63,7 @@ project/
    ```
    PORT=8000
    NODE_ENV=development
-   FRONTEND_URL=http://localhost:3000
+   FRONTEND_URL=http://localhost:5173
    ```
 
 4. Start the server:
@@ -155,46 +138,3 @@ The frontend application will run on http://localhost:5173
 - OTP must be exactly 6 digits
 - OTP must contain only numeric characters
 - OTP's last digit cannot be 7 (example server rule)
-
-## Testing
-
-### Running Tests
-
-```bash
-cd frontend
-npm run test
-
-cd ../backend
-npm run test
-```
-
-## Deployment
-
-The application is designed to be easily deployable to various hosting environments:
-
-### Backend
-
-- Can be deployed to services like Heroku, AWS, or DigitalOcean
-- Make sure to set the appropriate environment variables
-
-### Frontend
-
-- Can be deployed to Netlify, Vercel, or GitHub Pages
-- Update the API URL in production builds to point to your deployed backend
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- This project was created as a demonstration of a complete full-stack verification flow
-- Special thanks to all contributors
