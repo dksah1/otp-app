@@ -68,7 +68,7 @@ cd otp-app
 
 4. Start the server:
    ```bash
-   npm start
+   npm run dev
    ```
 
 The server will run on http://localhost:8000
@@ -89,7 +89,7 @@ The server will run on http://localhost:8000
 
 3. Start the development server:
    ```bash
-   npm start
+   npm run dev
    ```
 
 The frontend application will run on http://localhost:5173

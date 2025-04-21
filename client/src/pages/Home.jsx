@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 const OTP_COUNT = 6;
-
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 export default function Home() {
   const [inputArr, setInputArr] = useState(new Array(OTP_COUNT).fill(""));
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,9 @@ export default function Home() {
     const newArr = [...inputArr];
     newArr[index] = newValue.slice(-1);
     setInputArr(newArr);
-    newValue && refArr.current[index + 1]?.focus();
+    if (newValue) {
+      refArr.current[index + 1]?.focus();
+    }
 
     // Reset errors when user types
     setError("");
@@ -42,14 +44,12 @@ export default function Home() {
     e.preventDefault();
     const pastedData = e.clipboardData.getData("text").trim();
 
-    // Filter only numbers from the pasted content
     const pastedNumbers = pastedData.replace(/[^0-9]/g, "");
 
     if (!pastedNumbers) return;
 
     const newArr = [...inputArr];
 
-    // Fill the inputs with pasted digits
     for (let i = 0; i < OTP_COUNT; i++) {
       const pasteIndex = i + index;
       if (pasteIndex < OTP_COUNT && i < pastedNumbers.length) {
@@ -97,23 +97,17 @@ export default function Home() {
     setLoading(true);
     setError("");
 
-    // Concatenate all digits to form the OTP
     const otp = inputArr.join("");
 
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/otp/verify",
-        {
-          otp,
-        }
-      );
+      const response = await axios.post(`${baseUrl}/api/otp/verify`, {
+        otp,
+      });
 
       if (response.data.success) {
-        // Redirect to success route
         window.location.href = "/success";
       }
     } catch (error) {
-      // Display the error message from the server
       if (error.response && error.response.data) {
         setError(error.response.data.error || "Verification Error");
       } else {
@@ -137,11 +131,11 @@ export default function Home() {
               return (
                 <input
                   value={inputArr[index]}
-                  className={`h-8 w-8 text-xl xs:h-9 xs:w-9 xs:text-2xl sm:h-12 sm:w-12 sm:text-4xl text-center mx-1 border ${
+                  className={`h-8 w-8  text-xl xs:h-9 xs:w-9 xs:text-2xl sm:h-12 sm:w-12 sm:text-4xl text-center mx-1 border-2 ${
                     invalidInputs[index]
                       ? "border-red-500 bg-red-50"
-                      : "border-gray-300"
-                  } rounded focus:outline-none focus:border-indigo-600 caret-indigo-600`}
+                      : "border-gray-300  border-s-slate-900 border-t-slate-900"
+                  } rounded-lg focus:outline-none focus:border-indigo-900 caret-indigo-900`}
                   type="text"
                   key={index}
                   ref={(input) => (refArr.current[index] = input)}
@@ -164,7 +158,7 @@ export default function Home() {
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className="rounded cursor-pointer py-2 px-4 bg-indigo-900  sm:w-32 text-white uppercase font-medium tracking-wider hover:bg-indigo-800 disabled:opacity-50 text-sm sm:text-base"
+            className="rounded-lg cursor-pointer py-2 px-4 bg-[#100249]  sm:w-48 text-white uppercase font-medium tracking-wider hover:bg-indigo-900 disabled:opacity-50 text-sm sm:text-base"
           >
             {loading ? "Verifying..." : "Submit"}
           </button>

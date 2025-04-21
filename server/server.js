@@ -15,14 +15,14 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/otp", otpRoutes);
 
-app.get("/", (req, res) => {
+app.get("/health", (req, res) => {
   res.send("OTP Verification API - Up and Running");
 });
 
 app.use((req, res) => {
-  res.status(404).json({
+  res.status(405).json({
     success: false,
-    error: "Endpoint not found",
+    error: "method not allowed",
   });
 });
 
