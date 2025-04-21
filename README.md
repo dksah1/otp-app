@@ -1,6 +1,6 @@
-# OTP Verification Application
+# OTP APP
 
-A simple yet robust application for handling 6-digit OTP (One-Time Password) verification flows. This application includes both frontend and backend components that work together to provide a seamless verification experience.
+This application includes both frontend and backend components that work together to provide a seamless verification experience.
 
 ## Features
 
