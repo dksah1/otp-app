@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const OTP_COUNT = 6;
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
@@ -11,6 +12,7 @@ export default function Home() {
     new Array(OTP_COUNT).fill(false)
   );
   const refArr = useRef([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     refArr?.current[0]?.focus();
@@ -27,7 +29,6 @@ export default function Home() {
       refArr.current[index + 1]?.focus();
     }
 
-    // Reset errors when user types
     setError("");
     const newInvalidInputs = [...invalidInputs];
     newInvalidInputs[index] = false;
@@ -59,10 +60,8 @@ export default function Home() {
 
     setInputArr(newArr);
 
-    // Reset invalid inputs
     setInvalidInputs(new Array(OTP_COUNT).fill(false));
 
-    // Focus on the appropriate input after pasting
     const nextFocusIndex = Math.min(
       index + pastedNumbers.length,
       OTP_COUNT - 1
@@ -76,7 +75,6 @@ export default function Home() {
     const newInvalidInputs = [...invalidInputs];
     let isValid = true;
 
-    // Check for empty inputs
     for (let i = 0; i < OTP_COUNT; i++) {
       if (inputArr[i] === "") {
         newInvalidInputs[i] = true;
@@ -105,7 +103,7 @@ export default function Home() {
       });
 
       if (response.data.success) {
-        window.location.href = "/success";
+        navigate("/success");
       }
     } catch (error) {
       if (error.response && error.response.data) {
